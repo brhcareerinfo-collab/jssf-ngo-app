@@ -121,10 +121,16 @@
 </div>
 
 </form>
+</div>
+<script>
+function showFee() {
+    const post = document.getElementById("post");
+    const fee = document.getElementById("fee");
+    fee.value = post.value;
+}
+</script>
 
-</div>
-</div>
-  <script type="module" src="firebase.js"></script>
+<script type="module" src="firebase.js"></script>
 <script type="module" src="membership.js"></script>
 </body>
 </html>
