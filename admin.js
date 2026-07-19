@@ -15,13 +15,24 @@ async function loadMembers() {
     const data = doc.data();
 
     table.innerHTML += `
-      <tr>
-        <td>${data.fullName || ""}</td>
-        <td>${data.mobile || ""}</td>
-        <td>${data.post || ""}</td>
-        <td>₹${data.fee || ""}</td>
-        <td>${data.status || "Pending"}</td>
-      </tr>
+      table.innerHTML += `
+<tr>
+  <td>${data.fullName || ""}</td>
+  <td>${data.mobile || ""}</td>
+  <td>${data.post || ""}</td>
+  <td>₹${data.fee || ""}</td>
+  <td>${data.status || "Pending"}</td>
+  <td>
+    <button class="btn btn-success btn-sm">
+      Approve
+    </button>
+
+    <button class="btn btn-danger btn-sm mt-1">
+      Reject
+    </button>
+  </td>
+</tr>
+`;
     `;
   });
 
