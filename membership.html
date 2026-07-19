@@ -91,6 +91,37 @@
 </form>
 
 </div>
+<div class="col-md-6 mb-3">
+<label>जिस पद के लिए आवेदन कर रहे हैं *</label>
 
+<select class="form-select" id="post" onchange="showFee()">
+
+<option value="">-- पद चुनें --</option>
+
+<option value="100">सामान्य सदस्य</option>
+
+<option value="500">सक्रिय सदस्य</option>
+
+<option value="200">स्वयंसेवक</option>
+
+<option value="3000">ब्लॉक अध्यक्ष</option>
+
+<option value="5000">तहसील अध्यक्ष</option>
+
+<option value="7000">जिला अध्यक्ष</option>
+
+<option value="11000">प्रदेश पदाधिकारी</option>
+
+</select>
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<label>सदस्यता शुल्क</label>
+
+<input type="text" id="fee" class="form-control" readonly>
+
+</div>
 </body>
 </html>
