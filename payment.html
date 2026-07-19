@@ -42,6 +42,7 @@ readonly>
 <div class="mb-3">
 <label>Transaction ID</label>
 <input type="text"
+id="transactionId"
 class="form-control"
 placeholder="Transaction ID दर्ज करें">
 </div>
@@ -49,16 +50,20 @@ placeholder="Transaction ID दर्ज करें">
 <div class="mb-3">
 <label>Payment Screenshot</label>
 <input type="file"
+id="paymentScreenshot"
 class="form-control">
 </div>
 
-<button class="btn btn-success w-100">
+<button
+id="submitPayment"
+class="btn btn-success w-100">
 भुगतान की जानकारी जमा करें
-</button>
+</button
+  </div>
 
 </div>
 
-</div>
+<script type="module" src="payment.js"></script>
 
 </body>
 </html>
