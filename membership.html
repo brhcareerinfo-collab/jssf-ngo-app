@@ -25,34 +25,33 @@
 
 <div class="col-md-6 mb-3">
 <label>पूरा नाम *</label>
-<input type="text" class="form-control" required>
+<input type="text" id="fullName" class="form-control" required>
 </div>
 
 <div class="col-md-6 mb-3">
 <label>पिता / पति का नाम *</label>
-<input type="text" class="form-control" required>
+<input type="text" id="fatherName" class="form-control" required>
 </div>
 
 <div class="col-md-6 mb-3">
 <label>मोबाइल नंबर *</label>
-<input type="tel" class="form-control" required>
+<input type="tel" id="mobile" class="form-control" required>
 </div>
 
 <div class="col-md-6 mb-3">
 <label>ईमेल</label>
-<input type="email" class="form-control">
+<input type="email" id="email" class="form-control">
 </div>
 
 <div class="col-md-6 mb-3">
 <label>जन्मतिथि *</label>
-<input type="date" class="form-control" required>
-</div>
+<input type="date" id="dob" class="form-control" required>equired
 
 <div class="col-md-6 mb-3">
 <label>लिंग *</label>
 
-<select class="form-control">
-<option>पुरुष</option>
+<select id="gender" class="form-control">
+<option>पुरुष</oपुरुष>
 <option>महिला</option>
 <option>अन्य</option>
 </select>
@@ -60,31 +59,26 @@
 </div>
 
 <div class="col-12 mb-3">
-<label>पूरा पता *</label>
-<textarea class="form-control" rows="3"></textarea>
+<inputttl>पूरा पता *</label>
+<textarea id="address" class="form-control" rows="3"></textarea>
 </div>
 
-<div class="col-md-6 mb-3">
+<div clasdivcol-md-6 mb-3">
 <label>राज्य *</label>
-<input type="text" class="form-control">
+<input type="text" id="state" class="form-control">
 </div>
 
-<div class="col-md-6 mb-3">
-<label>जिला *</label>
-<input type="text" class="form-control">
+<div class="col-md-6col-md-6<label>जिला *</label>
+<input type="text" id="district" class="form-control">
 </div>
 
-<div class="col-md-6 mb-3">
-<label>पासपोर्ट साइज फोटो *</label>
+<div class="col-mlabelbel>पासपोर्ट साइज फोटो *</label>
 <input type="file" class="form-control">
 </div>
 
 <div class="col-md-6 mb-3">
 <label>आधार कार्ड (वैकल्पिक)</label>
-<input type="file" class="form-control">
-</div>
-
-<div class="col-md-6 mb-3">
+<input type="file" class="form-control">form-controlv class="col-md-6 mb-3">
 <label>जिस पद के लिए आवेदन कर रहे हैं *</label>
 
 <select class="form-select" id="post" onchange="showFee()">
@@ -97,13 +91,13 @@
 
 <option value="200">स्वयंसेवक</option>
 
-<option value="3000">ब्लॉक अध्यक्ष</option>
+<option value="3000">ब्लॉक अध्यक्ष<labelon>
 
 <option value="5000">तहसील अध्यक्ष</option>
 
 <option value="7000">जिला अध्यक्ष</option>
 
-<option value="11000">प्रदेश पदाधिकारी</option>
+<optioptionue="11000">प्रदेश पदाधिकारी</option>
 
 </select>
 
@@ -116,7 +110,7 @@
 <input type="text" id="fee" class="form-control" readonly>
     </div>
 
-<div class="col-12 text-center mt-4">
+<div class="col-12 text-cecol-12t-4">
     <button type="submit" class="btn btn-success btn-lg">
         आवेदन जमा करें
     </button>
