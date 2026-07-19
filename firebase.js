@@ -5,18 +5,16 @@ import { getAuth } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth
 
 const firebaseConfig = {
 
-  apiKey: "YOUR_API_KEY",
-
-  authDomain: "YOUR_AUTH_DOMAIN",
-
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyDO6qicYhQIAix_BFGgj_vskBTcZOzlmQc",
+  authDomain: "jssf-member-portal.firebaseapp.com",
   projectId: "jssf-member-portal",
-
-  storageBucket: "YOUR_STORAGE_BUCKET",
-
+  storageBucket: "jssf-member-portal.firebasestorage.app",
   messagingSenderId: "1072736110249",
-
-  appId: "YOUR_APP_ID"
-
+  appId: "1:1072736110249:web:d59de5fd4be72661324bb8",
+  measurementId: "G-DJ00HETSYH"
+};
 };
 
 const app = initializeApp(firebaseConfig);
