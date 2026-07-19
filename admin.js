@@ -20,7 +20,8 @@ async function loadMembers() {
 
     table.innerHTML += `
       <tr>
-        <td>${data.fullName || ""}</td>
+  <td>${data.memberId || "-"}</td>
+  <td>${data.fullName || ""}</td>
         <td>${data.mobile || ""}</td>
         <td>${data.post || ""}</td>
         <td>₹${data.fee || ""}</td>
