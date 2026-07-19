@@ -49,8 +49,9 @@ loadMembers();
 window.approveMember = async function(id) {
 
   await updateDoc(doc(db, "members", id), {
-    status: "Approved"
-  });
+    status: "Approved",
+    memberId: "JSSF" + Date.now()
+});
 
   alert("Member Approved");
 
