@@ -20,7 +20,9 @@
 <h4 class="text-center mb-5">
 ऑनलाइन सदस्यता आवेदन
 </h4>
+
 <form id="memberForm">
+
 <div class="row">
 
 <div class="col-md-6 mb-3">
@@ -46,82 +48,72 @@
 <div class="col-md-6 mb-3">
 <label>जन्मतिथि *</label>
 <input type="date" id="dob" class="form-control" required>
+</div>
 
 <div class="col-md-6 mb-3">
 <label>लिंग *</label>
-
 <select id="gender" class="form-control">
-<option>पुरुष</oपुरुष>
-<option>महिला</option>
-<option>अन्य</option>
+<option value="पुरुष">पुरुष</option>
+<option value="महिला">महिला</option>
+<option value="अन्य">अन्य</option>
 </select>
-
 </div>
 
 <div class="col-12 mb-3">
-<inputttl>पूरा पता *</label>
-<textarea id="address" class="form-control" rows="3"></textarea>
+<label>पूरा पता *</label>
+<textarea id="address" class="form-control" rows="3" required></textarea>
 </div>
 
-<div clasdivcol-md-6 mb-3">
+<div class="col-md-6 mb-3">
 <label>राज्य *</label>
-<input type="text" id="state" class="form-control">
-</div>
-
-<div class="col-md-6col-md-6<label>जिला *</label>
-<input type="text" id="district" class="form-control">
-</div>
-
-<div class="col-mlabelbel>पासपोर्ट साइज फोटो *</label>
-<input type="file" class="form-control">
+<input type="text" id="state" class="form-control" required>
 </div>
 
 <div class="col-md-6 mb-3">
-    <label>पासपोर्ट साइज फोटो *</label>
-    <input type="file" id="photo" class="form-control" required>
+<label>जिला *</label>
+<input type="text" id="district" class="form-control" required>
 </div>
 
 <div class="col-md-6 mb-3">
-    <label>आधार कार्ड (वैकल्पिक)</label>
-    <input type="file" id="aadhaar" class="form-control">
+<label>पासपोर्ट साइज फोटो *</label>
+<input type="file" id="photo" class="form-control" required>
 </div>
+
+<div class="col-md-6 mb-3">
+<label>आधार कार्ड (वैकल्पिक)</label>
+<input type="file" id="aadhaar" class="form-control">
+</div>
+<div class="col-md-6 mb-3">
 <label>जिस पद के लिए आवेदन कर रहे हैं *</label>
 
-<select class="form-select" id="post" onchange="showFee()">
-
+<select class="form-select" id="post" onchange="showFee()" required>
 <option value="">-- पद चुनें --</option>
-
 <option value="100">सामान्य सदस्य</option>
-
 <option value="500">सक्रिय सदस्य</option>
-
 <option value="200">स्वयंसेवक</option>
-
-<option value="3000">ब्लॉक अध्यक्ष<labelon>
-
+<option value="3000">ब्लॉक अध्यक्ष</option>
 <option value="5000">तहसील अध्यक्ष</option>
-
 <option value="7000">जिला अध्यक्ष</option>
-
-<optioptionue="11000">प्रदेश पदाधिकारी</option>
-
+<option value="11000">प्रदेश पदाधिकारी</option>
 </select>
-
 </div>
 
 <div class="col-md-6 mb-3">
-
 <label>सदस्यता शुल्क</label>
-
 <input type="text" id="fee" class="form-control" readonly>
-    </div>
+</div>
 
-<div class="col-12 text-cecol-12t-4">
-    <button type="submit" class="btn btn-success btn-lg">
-        आवेदन जमा करें
-    </button>
+<div class="col-12 text-center mt-4">
+<button type="submit" class="btn btn-success btn-lg">
+आवेदन जमा करें
+</button>
+</div>
+
 </div>
 </form>
+
+</div>
+
 <script>
 function showFee() {
     const post = document.getElementById("post");
@@ -132,5 +124,6 @@ function showFee() {
 
 <script type="module" src="firebase.js"></script>
 <script type="module" src="membership.js"></script>
+
 </body>
 </html>
