@@ -102,3 +102,17 @@ body{
     display:block;
     margin-top:0;
 }
+.hero-buttons{
+    text-align:center;
+    margin-top:-80px;
+    margin-bottom:30px;
+    position:relative;
+    z-index:10;
+}
+
+.hero-buttons .btn{
+    margin:8px;
+    padding:12px 25px;
+    border-radius:30px;
+    font-weight:bold;
+}
