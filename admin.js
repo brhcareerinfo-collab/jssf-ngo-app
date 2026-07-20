@@ -11,7 +11,9 @@ const table = document.getElementById("memberTable");
 const searchInput = document.getElementById("searchInput");
 const counterRef = doc(db, "counters", "membership");
 let allMembers = [];
-
+window.onerror = function(message, source, lineno, colno, error){
+    alert(message + "\nLine: " + lineno);
+};
 async function loadMembers() {
 
   try {
