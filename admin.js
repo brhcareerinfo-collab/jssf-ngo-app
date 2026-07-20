@@ -1,4 +1,4 @@
-import { db } from "./firebase.js";
+memberIderIdrt { db } from "./firebase.js";
 
 import {
   collection,
@@ -207,7 +207,15 @@ await updateDoc(doc(db,"members",id),{
 
 status:"Approved",
 
-memberId:"JSSF"+Date.now()
+const now = new Date();
+
+const month = String(now.getMonth() + 1).padStart(2, "0");
+
+const year = String(now.getFullYear()).slice(-2);
+
+const random = Math.floor(1000 + Math.random() * 9000);
+
+memberId: `JSSF/${month}/${year}/${random}`
 
 });
 
