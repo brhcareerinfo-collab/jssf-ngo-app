@@ -27,6 +27,19 @@ async function loadMembers() {
         <td>₹${data.fee || ""}</td>
         <td>${data.status || "Pending"}</td>
         <td>
+<button
+class="btn btn-primary btn-sm"
+onclick="viewMember('${doc.id}')">
+View
+</button>
+
+<br><br>
+
+...Approve...
+
+...Reject...
+
+</td>
           <button
 ${data.status === "Approved"
 ? `<span class="badge bg-success">Approved</span>`
