@@ -1,19 +1,17 @@
-import { db } from "./firebase.js";
+memberIderIdrt { db } from "./firebase.js";
 
 import {
   collection,
   getDocs,
   doc,
-  updateDoc,
-  runTransaction
+  updateDoc
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+
 const table = document.getElementById("memberTable");
 const searchInput = document.getElementById("searchInput");
-const counterRef = doc(db, "counters", "membership");
+
 let allMembers = [];
-window.onerror = function(message, source, lineno, colno, error){
-    alert(message + "\nLine: " + lineno);
-};
+
 async function loadMembers() {
 
   try {
@@ -205,84 +203,40 @@ window.location.href="member-details.html?id="+id;
 
 window.approveMember = async function(id){
 
-  try {
+await updateDoc(doc(db,"members",id),{
 
-    const now = new Date();
-    const month = String(now.getMonth() + 1).padStart(2, "0");
-    const year = String(now.getFullYear()).slice(-2);
+status:"Approved",
 
-    await runTransaction(db, async (transaction) => {
+const now = new Date();
 
-      const counterDoc = await transaction.get(counterRef);
+const month = String(now.getMonth() + 1).padStart(2, "0");
 
-      let lastNumber = 0;
+const year = String(now.getFullYear()).slice(-2);
 
-      if (counterDoc.exists()) {
-        lastNumber = counterDoc.data().lastNumber || 0;
-      }
+const random = Math.floor(1000 + Math.random() * 9000);
 
-      lastNumber++;
+memberId: `JSSF/${month}/${year}/${random}`
 
-      const memberId =
-        `JSSF/${month}/${year}/${String(lastNumber).padStart(4,"0")}`;
+});
 
-      transaction.update(counterRef,{
-        lastNumber:lastNumber
-      });
+alert("Member Approved");
 
-      transaction.update(doc(db,"members",id),{
-
-        status:"Approved",
-
-        memberId:memberId
-
-      });
-
-    });
-
-    alert("Member Approved Successfully");
-
-    loadMembers();
-
-  } catch(err){
-
-    console.error(err);
-
-    alert(err.message);
-
-  }
-
-window.rejectMember = async function(id){
-
-  await updateDoc(doc(db,"members",id),{
-    status:"Rejected"
-  });
-
-  alert("Member Rejected");
-  } // <-- catch के बाद approveMember को बंद करो
+loadMembers();
 
 }
 
 window.rejectMember = async function(id){
 
-  try{
+await updateDoc(doc(db,"members",id),{
 
-    await updateDoc(doc(db,"members",id),{
-      status:"Rejected"
-    });
+status:"Rejected"
 
-    alert("Member Rejected Successfully");
+});
 
-  }catch(err){
+alert("Member Rejected");
 
-    console.error(err);
-
-    alert(err.message);
-
-  }
+loadMembers();
 
 }
 
 loadMembers();
-  
-  loadMembers();
