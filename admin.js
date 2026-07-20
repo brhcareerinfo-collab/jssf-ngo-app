@@ -28,16 +28,22 @@ async function loadMembers() {
         <td>${data.status || "Pending"}</td>
         <td>
           <button
+${data.status === "Approved"
+? `<span class="badge bg-success">Approved</span>`
+: `<button
 class="btn btn-success btn-sm"
 onclick="approveMember('${doc.id}')">
 Approve
-</button>
+</button>`}
 
 <button
+${data.status === "Rejected"
+? `<span class="badge bg-danger">Rejected</span>`
+: `<button
 class="btn btn-danger btn-sm"
 onclick="rejectMember('${doc.id}')">
 Reject
-</button>
+</button>`}
         </td>
       </tr>
     `;
