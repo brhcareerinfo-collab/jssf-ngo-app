@@ -8,118 +8,227 @@ import {
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
 const table = document.getElementById("memberTable");
+const searchInput = document.getElementById("searchInput");
+
+let allMembers = [];
 
 async function loadMembers() {
 
-  table.innerHTML = "";
+  try {
 
-  const querySnapshot = await getDocs(collection(db, "members"));
-let total = 0;
-let approved = 0;
-let pending = 0;
-let rejected = 0;
-let collection = 0;
-  querySnapshot.forEach((member) => {
-
-    const data = member.data();
-total++;
-
-if (data.status === "Approved") {
-  approved++;
-} else if (data.status === "Rejected") {
-  rejected++;
-} else {
-  pending++;
-}
-
-collection += Number(data.fee || 0);
-    table.innerHTML += `
+    table.innerHTML = `
       <tr>
-        <td>${data.memberId || "-"}</td>
-        <td>${data.fullName || ""}</td>
-        <td>${data.mobile || ""}</td>
-        <td>${data.post || ""}</td>
-        <td>₹${data.fee || ""}</td>
-        <td>${data.status || "Pending"}</td>
-
-        <td>
-
-          <button class="btn btn-primary btn-sm"
-            onclick="viewMember('${member.id}')">
-            View
-          </button>
-
-          <br><br>
-<button class="btn btn-warning btn-sm"
-onclick="window.location.href='id-card.html?id=${member.id}'">
-🪪 ID Card
-</button>
-
-<br><br>
-          ${
-            data.status === "Pending"
-            ? `
-              <button class="btn btn-success btn-sm"
-                onclick="approveMember('${member.id}')">
-                Approve
-              </button>
-
-              <br><br>
-
-              <button class="btn btn-danger btn-sm"
-                onclick="rejectMember('${member.id}')">
-                Reject
-              </button>
-            `
-            : data.status === "Approved"
-            ? `<span class="badge bg-success">Approved</span>`
-            : `<span class="badge bg-danger">Rejected</span>`
-          }
-
+        <td colspan="7" class="text-center">
+          Loading...
         </td>
-
       </tr>
     `;
 
-  });
-document.getElementById("totalMembers").textContent = total;
+    const snapshot = await getDocs(collection(db, "members"));
 
-document.getElementById("approvedMembers").textContent = approved;
+    allMembers = [];
 
-document.getElementById("pendingMembers").textContent = pending;
+    snapshot.forEach((docSnap) => {
 
-document.getElementById("rejectedMembers").textContent = rejected;
+      allMembers.push({
+        id: docSnap.id,
+        ...docSnap.data()
+      });
 
-document.getElementById("totalCollection").textContent = "₹" + collection;
+    });
+
+    renderTable(allMembers);
+
+  } catch (error) {
+
+    console.error(error);
+
+    table.innerHTML = `
+      <tr>
+        <td colspan="7" class="text-danger text-center">
+          ${error.message}
+        </td>
+      </tr>
+    `;
+
+  }
+
 }
+
+function renderTable(list) {
+
+  table.innerHTML = "";
+
+  let total = 0;
+  let approved = 0;
+  let pending = 0;
+  let rejected = 0;
+  let totalCollection = 0;
+
+  list.forEach((data) => {
+
+    total++;
+
+    if (data.status === "Approved") {
+
+      approved++;
+
+    } else if (data.status === "Rejected") {
+
+      rejected++;
+
+    } else {
+
+      pending++;
+
+    }
+
+    totalCollection += Number(data.fee || 0);
+
+    table.innerHTML += `
+
+<tr>
+
+<td>${data.memberId || "-"}</td>
+
+<td>${data.fullName || ""}</td>
+
+<td>${data.mobile || ""}</td>
+
+<td>${data.post || ""}</td>
+
+<td>₹${data.fee || 0}</td>
+
+<td>${data.status || "Pending"}</td>
+
+<td>
+
+<button
+class="btn btn-primary btn-sm mb-2 w-100"
+onclick="viewMember('${data.id}')">
+View
+</button>
+
+<button
+class="btn btn-warning btn-sm mb-2 w-100"
+onclick="window.location.href='id-card.html?id=${data.id}'">
+🪪 ID Card
+</button>
+
+${
+data.status==="Pending"
+?
+
+`<button
+class="btn btn-success btn-sm mb-2 w-100"
+onclick="approveMember('${data.id}')">
+Approve
+</button>
+
+<button
+class="btn btn-danger btn-sm w-100"
+onclick="rejectMember('${data.id}')">
+Reject
+</button>`
+
+:
+
+data.status==="Approved"
+
+?
+
+`<span class="badge bg-success">
+Approved
+</span>`
+
+:
+
+`<span class="badge bg-danger">
+Rejected
+</span>`
+
+}
+
+</td>
+
+</tr>
+
+`;
+
+  });
+
+  if (list.length === 0) {
+
+    table.innerHTML = `
+<tr>
+<td colspan="7" class="text-center">
+No Members Found
+</td>
+</tr>
+`;
+
+  }
+
+  document.getElementById("totalMembers").textContent = total;
+  document.getElementById("approvedMembers").textContent = approved;
+  document.getElementById("pendingMembers").textContent = pending;
+  document.getElementById("rejectedMembers").textContent = rejected;
+  document.getElementById("totalCollection").textContent = "₹" + totalCollection;
+
+}
+
+searchInput.addEventListener("keyup", function () {
+
+  const value = this.value.toLowerCase();
+
+  const filtered = allMembers.filter(member =>
+
+(member.fullName || "").toLowerCase().includes(value) ||
+
+(member.mobile || "").includes(value) ||
+
+(member.memberId || "").toLowerCase().includes(value)
+
+);
+
+renderTable(filtered);
+
+});
+
+window.viewMember = function(id){
+
+window.location.href="member-details.html?id="+id;
+
+}
+
+window.approveMember = async function(id){
+
+await updateDoc(doc(db,"members",id),{
+
+status:"Approved",
+
+memberId:"JSSF"+Date.now()
+
+});
+
+alert("Member Approved");
 
 loadMembers();
 
-window.viewMember = function(id) {
-  window.location.href = "member-details.html?id=" + id;
-};
+}
 
-window.approveMember = async function(id) {
+window.rejectMember = async function(id){
 
-  await updateDoc(doc(db, "members", id), {
-    status: "Approved",
-    memberId: "JSSF" + Date.now()
-  });
+await updateDoc(doc(db,"members",id),{
 
-  alert("Member Approved Successfully");
+status:"Rejected"
 
-  loadMembers();
+});
 
-};
+alert("Member Rejected");
 
-window.rejectMember = async function(id) {
+loadMembers();
 
-  await updateDoc(doc(db, "members", id), {
-    status: "Rejected"
-  });
+}
 
-  alert("Member Rejected Successfully");
-
-  loadMembers();
-
-};
+loadMembers();
