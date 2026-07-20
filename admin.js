@@ -36,7 +36,12 @@ async function loadMembers() {
           </button>
 
           <br><br>
+<button class="btn btn-warning btn-sm"
+onclick="window.location.href='id-card.html?id=${member.id}'">
+🪪 ID Card
+</button>
 
+<br><br>
           ${
             data.status === "Pending"
             ? `
