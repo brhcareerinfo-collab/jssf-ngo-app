@@ -259,7 +259,3 @@ window.rejectMember = async function(id){
   alert("Member Rejected");
 
   loadMembers();
-
-}
-
-loadMembers();
