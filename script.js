@@ -20,3 +20,15 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
+import { db } from "./firebase.js";
+
+import {
+collection,
+onSnapshot
+} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+
+const memberCount = document.getElementById("memberCount");
+
+onSnapshot(collection(db, "members"), (snapshot) => {
+    memberCount.textContent = snapshot.size;
+});
