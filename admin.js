@@ -9,7 +9,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 const table = document.getElementById("memberTable");
 const searchInput = document.getElementById("searchInput");
-
+const counterRef = doc(db, "counters", "membership");
 let allMembers = [];
 
 async function loadMembers() {
