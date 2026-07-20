@@ -14,11 +14,25 @@ async function loadMembers() {
   table.innerHTML = "";
 
   const querySnapshot = await getDocs(collection(db, "members"));
-
+let total = 0;
+let approved = 0;
+let pending = 0;
+let rejected = 0;
+let collection = 0;
   querySnapshot.forEach((member) => {
 
     const data = member.data();
+total++;
 
+if (data.status === "Approved") {
+  approved++;
+} else if (data.status === "Rejected") {
+  rejected++;
+} else {
+  pending++;
+}
+
+collection += Number(data.fee || 0);
     table.innerHTML += `
       <tr>
         <td>${data.memberId || "-"}</td>
