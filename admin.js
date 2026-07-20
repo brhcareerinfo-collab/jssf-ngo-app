@@ -68,7 +68,15 @@ onclick="window.location.href='id-card.html?id=${member.id}'">
     `;
 
   });
+document.getElementById("totalMembers").textContent = total;
 
+document.getElementById("approvedMembers").textContent = approved;
+
+document.getElementById("pendingMembers").textContent = pending;
+
+document.getElementById("rejectedMembers").textContent = rejected;
+
+document.getElementById("totalCollection").textContent = "₹" + collection;
 }
 
 loadMembers();
