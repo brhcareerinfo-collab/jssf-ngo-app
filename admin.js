@@ -203,37 +203,54 @@ window.location.href="member-details.html?id="+id;
 
 window.approveMember = async function(id){
 
-await updateDoc(doc(db,"members",id),{
+  try {
 
-status:"Approved",
+    const now = new Date();
+    const month = String(now.getMonth() + 1).padStart(2, "0");
+    const year = String(now.getFullYear()).slice(-2);
 
-const now = new Date();
+    await runTransaction(db, async (transaction) => {
 
-const month = String(now.getMonth() + 1).padStart(2, "0");
+      const counterDoc = await transaction.get(counterRef);
 
-const year = String(now.getFullYear()).slice(-2);
+      let lastNumber = 0;
 
-const random = Math.floor(1000 + Math.random() * 9000);
+      if (counterDoc.exists()) {
+        lastNumber = counterDoc.data().lastNumber || 0;
+      }
 
-memberId: `JSSF/${month}/${year}/${random}`
+      lastNumber++;
 
-});
+      const memberId =
+        `JSSF/${month}/${year}/${String(lastNumber).padStart(4,"0")}`;
 
-alert("Member Approved");
+      transaction.update(counterRef,{
+        lastNumber:lastNumber
+      });
 
-loadMembers();
+      transaction.update(doc(db,"members",id),{
+
+        status:"Approved",
+
+        memberId:memberId
+
+      });
+
+    });
+
+    alert("Member Approved Successfully");
+
+    loadMembers();
+
+  } catch(err){
+
+    console.error(err);
+
+    alert(err.message);
+
+  }
 
 }
-
-window.rejectMember = async function(id){
-
-await updateDoc(doc(db,"members",id),{
-
-status:"Rejected"
-
-});
-
-alert("Member Rejected");
 
 loadMembers();
 
