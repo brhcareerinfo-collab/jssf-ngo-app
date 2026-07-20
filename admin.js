@@ -1,4 +1,4 @@
-memberIderIdrt { db } from "./firebase.js";
+import { db } from "./firebase.js";
 
 import {
   collection,
@@ -250,9 +250,15 @@ window.approveMember = async function(id){
 
   }
 
-}
+window.rejectMember = async function(id){
 
-loadMembers();
+  await updateDoc(doc(db,"members",id),{
+    status:"Rejected"
+  });
+
+  alert("Member Rejected");
+
+  loadMembers();
 
 }
 
