@@ -257,5 +257,30 @@ window.rejectMember = async function(id){
   });
 
   alert("Member Rejected");
+  } // <-- catch के बाद approveMember को बंद करो
 
+}
+
+window.rejectMember = async function(id){
+
+  try{
+
+    await updateDoc(doc(db,"members",id),{
+      status:"Rejected"
+    });
+
+    alert("Member Rejected Successfully");
+
+  }catch(err){
+
+    console.error(err);
+
+    alert(err.message);
+
+  }
+
+}
+
+loadMembers();
+  
   loadMembers();
