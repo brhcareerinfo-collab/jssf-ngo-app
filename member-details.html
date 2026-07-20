@@ -1,3 +1,40 @@
-window.viewMember = function(id) {
-    window.location.href = "member-details.html?id=" + id;
-}
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Member Details</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container py-4">
+
+<h2 class="text-center text-success">
+Member Details
+</h2>
+
+<div class="card p-4 shadow">
+
+<p><b>Member ID:</b> <span id="memberId"></span></p>
+
+<p><b>नाम:</b> <span id="fullName"></span></p>
+
+<p><b>मोबाइल:</b> <span id="mobile"></span></p>
+
+<p><b>पद:</b> <span id="post"></span></p>
+
+<p><b>Status:</b> <span id="status"></span></p>
+
+<p><b>शुल्क:</b> ₹<span id="fee"></span></p>
+
+</div>
+
+</div>
+
+<script type="module" src="member-details.js"></script>
+
+</body>
+</html>
