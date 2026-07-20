@@ -27,6 +27,7 @@ async function loadMembers() {
         <td>${data.post || ""}</td>
         <td>₹${data.fee || ""}</td>
         <td>${data.status || "Pending"}</td>
+
         <td>
 
           <button class="btn btn-primary btn-sm"
@@ -37,26 +38,27 @@ async function loadMembers() {
           <br><br>
 
           ${
-            data.status === "Approved"
-            ? `<span class="badge bg-success">Approved</span>`
-            : `<button class="btn btn-success btn-sm"
+            data.status === "Pending"
+            ? `
+              <button class="btn btn-success btn-sm"
                 onclick="approveMember('${member.id}')">
                 Approve
-              </button>`
-          }
+              </button>
 
-          <br><br>
+              <br><br>
 
-          ${
-            data.status === "Rejected"
-            ? `<span class="badge bg-danger">Rejected</span>`
-            : `<button class="btn btn-danger btn-sm"
+              <button class="btn btn-danger btn-sm"
                 onclick="rejectMember('${member.id}')">
                 Reject
-              </button>`
+              </button>
+            `
+            : data.status === "Approved"
+            ? `<span class="badge bg-success">Approved</span>`
+            : `<span class="badge bg-danger">Rejected</span>`
           }
 
         </td>
+
       </tr>
     `;
 
@@ -77,7 +79,7 @@ window.approveMember = async function(id) {
     memberId: "JSSF" + Date.now()
   });
 
-  alert("Member Approved");
+  alert("Member Approved Successfully");
 
   loadMembers();
 
@@ -89,7 +91,7 @@ window.rejectMember = async function(id) {
     status: "Rejected"
   });
 
-  alert("Member Rejected");
+  alert("Member Rejected Successfully");
 
   loadMembers();
 
